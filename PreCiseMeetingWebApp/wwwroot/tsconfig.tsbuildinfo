@@ -1,12 +1,1 @@
-{
-  "root": [
-    "../scripts/datehelper.ts",
-    "../scripts/filehelper.ts",
-    "../scripts/logger.ts",
-    "../scripts/main.ts",
-    "../scripts/meetings.ts",
-    "../scripts/preciseexception.ts",
-    "../scripts/randomizer.ts"
-  ],
-  "version": "5.8.2"
-}
+{"root":["../scripts/datehelper.ts","../scripts/filehelper.ts","../scripts/logger.ts","../scripts/main.ts","../scripts/meetings.ts","../scripts/preciseexception.ts","../scripts/randomizer.ts"],"version":"5.8.2"}

@@ -206,7 +206,7 @@ Distributed under the Apache License. See `LICENSE.txt` for more information.
 
 You can reach me via:
 - [Email](mailto:joseph_a_connelly@yahoo.com)
-- [LinkedIn](https://www.linkedin.com/in/joseph-connelly-6775012b5)
+- [LinkedIn](https://www.linkedin.com/in/joseph-a-connelly)
 - [GitHub](https://github.com/jconnelly-dev)
 
 ![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
