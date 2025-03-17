@@ -139,6 +139,10 @@ This is an example of how to list things you need to use the software and how to
   npm install npm@latest -g
   npm -v
   ```
+* esbuild
+  ```sh
+  npm install esbuild --save-dev
+  ```
 * typescript
   ```sh
   npm install -g typescript
