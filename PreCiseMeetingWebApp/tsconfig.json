@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outDir": "./wwwroot/dist",
+    "rootDir": "./scripts",
+    "target": "ES2015",
+    "module": "ES6",
+    "strict": true,
+    "lib": [ "ES2015", "DOM" ]
+  },
+  "include": [
+    "scripts/**/*.ts"
+  ]
+}

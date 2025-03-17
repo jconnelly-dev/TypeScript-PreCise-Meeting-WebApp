@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\dist\" />
+    <Folder Include="wwwroot\imgs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.8.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TypeScriptBuildCommand>tsc --build</TypeScriptBuildCommand>
+  </PropertyGroup>
+
+  <!-- Ensure the TypeScript compiler runs whenever you build or rebuild the project in Visual Studio -->
+  <Target Name="RunTypeScriptBuild" BeforeTargets="BeforeBuild">
+    <Message Text="Running TypeScript build ($(TypeScriptBuildCommand))..." Importance="high" />
+    <Exec Command="$(TypeScriptBuildCommand)" ContinueOnError="false" />
+  </Target>
+
+  <!-- Write the current UTC datetime in ISO 8601 format to file on every build -->
+  <Target Name="WriteUtcTimeToBuildFile" AfterTargets="Build">
+    <PropertyGroup>
+      <UtcNow>$([System.DateTime]::UtcNow.ToString("o"))</UtcNow>
+      <BuildTxtPath>$(ProjectDir)wwwroot\files\build.txt</BuildTxtPath>
+    </PropertyGroup>
+    <WriteLinesToFile File="$(BuildTxtPath)" Lines="$(UtcNow)" Overwrite="true" Encoding="UTF-8" />
+  </Target>
+
+</Project>
