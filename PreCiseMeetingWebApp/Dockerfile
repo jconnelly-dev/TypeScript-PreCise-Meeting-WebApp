@@ -19,7 +19,6 @@ RUN dotnet restore "./PreCiseMeetingWebApp.csproj"
 COPY . . 
 
 # Copy the package.json and package-lock.json from one directory above
-# Assuming they are one directory up in the context
 COPY ../package*.json .
 
 # Install npm dependencies (including esbuild) in the working directory
