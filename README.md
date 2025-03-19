@@ -91,6 +91,7 @@ However, each time it repeats this process it makes sure that no member's full n
   <li><span style="color:teal">so it generates 3 groups 25 randomized meetings, w/each of the 25 in each group having a unique 1st person</span></li>
 </ul>
 Once all weekly meetings have been generated it returns the randomized order for the given week based on today's date.
+<br />
 
 The amount of up-front processing is more involved, but the psuedo-random number generator will always create the same randomized lists, each day throughout the year - only resetting the subsequent year. 
 With local testing there doesn't seem to be any appreciable lag when loading the page for the first time, but if I wanted, one fun improvement to fix this heavy up-front lifting would be to:
@@ -99,7 +100,7 @@ With local testing there doesn't seem to be any appreciable lag when loading the
 * and during each publish the app, w/read-write access, can generate the cached list in a new S3 Bucket
 * the existing get randomized list logic can therefore exist client-side only as a fall-back in case it fails to find the cache
 
-I'm going to be hosting this web site on my personal Heroku account (because it's free), but will consider AWS if I can get my company to agree to it 😄
+I'm going to be hosting this web site on my personal Heroku account (because it's free).
 Within Heroku I will also be setting up automatic CI/CD deployments in their cloud platform, triggered everytime I push to master. 
 
 ... till next time, see ya 😁!
