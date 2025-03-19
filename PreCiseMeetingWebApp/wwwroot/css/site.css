@@ -1,9 +1,10 @@
 ﻿/**
  * Author: Joseph Connelly - the realist, the illist
  * Date: March 13, 2025
- * Project: PreCiseMRM Weekly Scrum Meeting Order Web App
- * Backend: .NET 8 Single Page Web Application
+ * Project: PreCiseMRM Weekly Scrum Meeting App
+ * Backend: .NET 8 SPA Website
  * Frontend: TypeScript, Symantic HTML, CSS
+ * Tools: esbuild for bundle + minification
  */
 
 :root {
@@ -37,6 +38,11 @@ body {
     justify-content: center;
     align-items: center;
     background: var(--precise-darkblue);
+}
+
+/* Prevent any content from showing until button event listeners and data are ready */
+body.preload {
+  visibility: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {

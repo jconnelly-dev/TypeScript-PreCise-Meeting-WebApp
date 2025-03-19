@@ -7,13 +7,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { Clipboard } from './Clipboard.js';
 import { DateHelper } from './DateHelper.js';
 import { FileHelper } from './FileHelper.js';
 import { Logger } from './Logger.js';
 import { Meetings } from './Meetings.js';
 // Ensure this script runs -> after the HTML document is fully parsed, but before the DOM content is fully loaded and displayed.
 document.addEventListener('DOMContentLoaded', () => __awaiter(void 0, void 0, void 0, function* () {
-    Logger.log(Logger.LogLevel.PROD, "DOM", addEventListener);
+    Logger.log(Logger.LogLevel.INFO, "DOM", addEventListener);
     const userNow = new Date();
     // Set the text content of the <time> element to utcNow converted to the user's timezone.
     const meetingTimeElement = document.getElementById('day-of-meeting');
@@ -46,67 +47,13 @@ document.addEventListener('DOMContentLoaded', () => __awaiter(void 0, void 0, vo
                     listElement.appendChild(itemElement);
                 });
                 // Adding an event listener for the button, now that the DOM has been fully loaded.
-                Logger.log(Logger.LogLevel.PROD, "DOM", addEventListener, "before getting buttonElement...");
                 const buttonElement = document.getElementById('copy-button');
-                Logger.log(Logger.LogLevel.PROD, "DOM", addEventListener, "after getting buttonElement...");
                 if (buttonElement) {
-                    Logger.log(Logger.LogLevel.PROD, "DOM", addEventListener, "buttonElement found!");
-                    buttonElement.addEventListener('click', copyElementChangeState); // Add event listener here
+                    buttonElement.addEventListener('click', Clipboard.copyElementChangeState);
                 }
             }
         }
     }
+    // Remove preload class from body now that DOM has been modified dynamically.
+    document.body.classList.remove('preload');
 }));
-function copyElementChangeState() {
-    const attendees = extractParticipants();
-    const meetingDate = extractMeetingDate();
-    let iconElement = document.getElementById('copy-icon');
-    if (attendees && meetingDate && iconElement) {
-        iconElement.classList.remove('fa-copy');
-        insertNamesIntoClipboard(meetingDate, attendees);
-        iconElement.classList.add('fa-check');
-    }
-}
-function extractParticipants() {
-    let extractedNames = [];
-    const listSectionElement = document.getElementById('participants-list');
-    if (listSectionElement) {
-        const participantItems = listSectionElement.querySelectorAll('li');
-        if (participantItems) {
-            participantItems.forEach((item) => {
-                var _a;
-                // Remove the number and any leading whitespace.
-                const name = (_a = item.textContent) === null || _a === void 0 ? void 0 : _a.replace(/^\d+\s*/, '').trim();
-                if (name) {
-                    extractedNames.push(name);
-                }
-            });
-        }
-    }
-    return extractedNames;
-}
-function extractMeetingDate() {
-    var _a;
-    let extractedDate = null;
-    const dateElement = document.getElementById('day-of-meeting');
-    if (dateElement) {
-        const dateString = (_a = dateElement.textContent) === null || _a === void 0 ? void 0 : _a.trim();
-        if (dateString) {
-            extractedDate = new Date(dateString);
-        }
-    }
-    return extractedDate;
-}
-function insertNamesIntoClipboard(date, attendees) {
-    let copiedText = "--- START MEETING ---";
-    if (date) {
-        const newLine = (typeof window === "undefined") ? "\r\n" : "\n"; // for Node.js vs browser
-        copiedText += `${newLine}--- ${date} ---`;
-        if (attendees) {
-            attendees.forEach((attendee, idx) => {
-                copiedText += `${newLine}[${idx}] ${attendee}`;
-            });
-        }
-        navigator.clipboard.writeText(copiedText);
-    }
-}

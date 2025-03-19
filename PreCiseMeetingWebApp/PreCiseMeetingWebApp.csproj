@@ -28,18 +28,9 @@
 		<Content Include="$(Dist)\*.min.js" />
 	</ItemGroup>
 
-	<!-- CLEAN all minified JS files during Clean target -->
-	<Target Name="CleanAllJsFiles" BeforeTargets="Clean">
-		<Message Text="🗑️ Full clean: deleting ALL JS (min + non-min) from dist..." Importance="high" />
-		<ItemGroup>
-			<AllJsFiles Include="$(Dist)\*.js" />
-		</ItemGroup>
-		<Delete Files="@(AllJsFiles)" ContinueOnError="true" />
-	</Target>
-
 	<!-- CLEAN old distribution files before each build -->
 	<Target Name="CleanDistribution" BeforeTargets="Build">
-		<Message Text="🧹 Cleaning old non-minified JS files..." Importance="high" />
+		<Message Text="🗑️ Cleaning old non-minified JS files..." Importance="high" />
 		<ItemGroup>
 			<NonMinifiedJsFiles Include="$(Dist)\*.js" Exclude="$(Dist)\*.min.js" />
 		</ItemGroup>
@@ -48,14 +39,14 @@
 
 	<!-- COMPILE and MINIFY JS -->
 	<Target Name="BuildTypeScriptAndMinify" BeforeTargets="Build">
-		<Message Text="🔨 Compiling TypeScript and Minifying JavaScript..." Importance="high" />
+		<Message Text="🛠️ Compiling TypeScript and Minifying JavaScript..." Importance="high" />
 		<Exec Command="tsc --build" ContinueOnError="false" />
 		<Exec Command="node bundle.js" ContinueOnError="false" />
 	</Target>
 
 	<!-- REMOVE .map files after each build -->
 	<Target Name="RemoveSourceMaps" AfterTargets="Build">
-		<Message Text="🧼 Removing source map files..." Importance="high" />
+		<Message Text="🔥 Removing source map files..." Importance="high" />
 		<ItemGroup>
 			<SourceMaps Include="$(DistDir)\*.map" ContinueOnError="false" />
 		</ItemGroup>

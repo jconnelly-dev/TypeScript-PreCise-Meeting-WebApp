@@ -8,7 +8,7 @@ export class Logger {
         if (Logger.LogLevelPriority[lvl] < Logger.LogLevelPriority[Logger.CURRENT_LEVEL]) {
             return;
         }
-        let logText = this.getLogHeader(lvl, cls, fnct);
+        let logText = Logger.getLogHeader(lvl, cls, fnct);
         if (msg) {
             logText += ` ${msg}`;
         }
@@ -18,12 +18,12 @@ export class Logger {
         if (Logger.LogLevelPriority[lvl] < Logger.LogLevelPriority[Logger.CURRENT_LEVEL]) {
             return;
         }
-        let logText = this.getLogHeader(lvl, cls, fnct);
+        let logText = Logger.getLogHeader(lvl, cls, fnct);
         if (err && err.message) {
             let errorName = "";
             let errorStack = "";
             if (err instanceof PreCiseException) {
-                errorName = this.nameof(PreCiseException);
+                errorName = Logger.nameof(PreCiseException);
             }
             else {
                 errorName = "Unexpected Error";
@@ -43,9 +43,9 @@ export class Logger {
             className = `${cls}.`;
         }
         else {
-            className = `${this.nameof(cls)}.`;
+            className = `${Logger.nameof(cls)}.`;
         }
-        return `[${localNow}] [${lvl}] [${className}${this.nameof(fnct)}()]`;
+        return `[${localNow}] [${lvl}] [${className}${Logger.nameof(fnct)}()]`;
     }
     static nameof(fnct) {
         return fnct.name;

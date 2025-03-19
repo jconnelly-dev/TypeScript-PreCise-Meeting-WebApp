@@ -31,18 +31,6 @@ export class DateHelper {
         return date.toLocaleDateString('en-US', formatOptions);
     }
 
-    public static convertUtcDateToLocal(utcDate: Date = new Date()): Date { // use the current UTC date when one isn't given
-        Logger.log(Logger.LogLevel.TRACE, DateHelper, DateHelper.convertUtcDateToLocal);
-
-        // Get the local time offset in minutes.
-        const localOffset = new Date().getTimezoneOffset();
-
-        // Convert UTC date to local date by adjusting the offset.
-        const localDate = new Date(utcDate.getTime() - (localOffset * 60000));
-
-        return localDate;
-    }
-
     public static getDayOfWeek(date: Date): DayOfWeek {
         Logger.log(Logger.LogLevel.TRACE, DateHelper, DateHelper.getDayOfWeek);
 
@@ -66,7 +54,7 @@ export class DateHelper {
         const diff = date.getTime() - startOfYear.getTime();
 
         // Calculate the day number of the date.
-        const dayOfYear = Math.floor(diff / this.MILLISECONDS_IN_ONE_DAY_IN);
+        const dayOfYear = Math.floor(diff / DateHelper.MILLISECONDS_IN_ONE_DAY_IN);
 
         return dayOfYear;
     }
@@ -81,11 +69,11 @@ export class DateHelper {
         }
 
         // Find the number day of year for the given date.
-        const dayOfYear: number = this.getDayOfYear(date);
+        const dayOfYear: number = DateHelper.getDayOfYear(date);
 
         // Calculate which number week the DayOfWeek in year.
         //  i.e. what Tuesday does today's date land on? January 21, 2025 is the 3rd Tuesday of the year.
-        return Math.floor(dayOfYear / this.DAYS_IN_WEEK) + 1;
+        return Math.floor(dayOfYear / DateHelper.DAYS_IN_WEEK) + 1;
     }
 
     public static isLeapYear(year: number): boolean {
@@ -99,34 +87,10 @@ export class DateHelper {
 
         const year = date.getFullYear();
 
-        let daysInYear: number = this.NORMAL_DAYS_IN_YEAR;
-        if (this.isLeapYear(year)) {
+        let daysInYear: number = DateHelper.NORMAL_DAYS_IN_YEAR;
+        if (DateHelper.isLeapYear(year)) {
             daysInYear++;
         }
         return daysInYear;
-    }
-
-    public static getNumWeeksInYear(date: Date): number {
-        Logger.log(Logger.LogLevel.TRACE, DateHelper, DateHelper.getNumWeeksInYear);
-
-        const year: number = date.getFullYear();
-        const isLeapYear: boolean = this.isLeapYear(year);
-
-        // Create dates for the first and last day of the year.
-        const firstDayOfYear: Date = new Date(year, 0, 1);
-        const lastDayOfYear: Date = new Date(year, 12, 31);
-
-        // Find the day of the week for first/last days in the year.
-        const dayofWeekFirstDayOfYear: DayOfWeek = this.getDayOfWeek(firstDayOfYear);
-        const dayOfWeekLastDayOfYear: DayOfWeek = this.getDayOfWeek(lastDayOfYear);
-
-        // If the first day is Thursday in a common year OR Wednesday in a leap year -> 53 weeks
-        const isUncommonYear = dayofWeekFirstDayOfYear === Days.Thursday || (isLeapYear && dayOfWeekLastDayOfYear === Days.Wednesday);
-
-        let weeksInYear = this.NORMAL_WEEKS_IN_YEAR;
-        if (isUncommonYear) {
-            weeksInYear++;
-        }
-        return weeksInYear;
     }
 }

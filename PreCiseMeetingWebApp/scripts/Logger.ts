@@ -39,7 +39,7 @@ export class Logger {
             return;
         }
 
-        let logText: string = this.getLogHeader(lvl, cls, fnct);
+        let logText: string = Logger.getLogHeader(lvl, cls, fnct);
         if (msg) {
             logText += ` ${msg}`;
         }
@@ -53,13 +53,13 @@ export class Logger {
             return;
         }
 
-        let logText: string = this.getLogHeader(lvl, cls, fnct);
+        let logText: string = Logger.getLogHeader(lvl, cls, fnct);
         if (err && err.message) {
 
             let errorName: string = "";
             let errorStack: string = "";
             if (err instanceof PreCiseException) {
-                errorName = this.nameof(PreCiseException);
+                errorName = Logger.nameof(PreCiseException);
             } else {
                 errorName = "Unexpected Error";
                 if (err.stack) {
@@ -82,10 +82,10 @@ export class Logger {
         if (typeof cls === 'string') {
             className = `${cls}.`;
         } else {
-            className = `${this.nameof(cls)}.`;
+            className = `${Logger.nameof(cls)}.`;
         }
 
-        return `[${localNow}] [${lvl}] [${className}${this.nameof(fnct)}()]`;
+        return `[${localNow}] [${lvl}] [${className}${Logger.nameof(fnct)}()]`;
     }
 
     private static nameof(fnct: Function): string {
