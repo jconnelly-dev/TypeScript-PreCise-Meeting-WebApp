@@ -1,27 +1,52 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>TypeScript_Meeting_WebApp</RootNamespace>
-    <UserSecretsId>059fb393-e1ef-4d78-9098-29af74d349ac</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>.</DockerfileContext>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<RootNamespace>TypeScript_Meeting_WebApp</RootNamespace>
+		<UserSecretsId>059fb393-e1ef-4d78-9098-29af74d349ac</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>.</DockerfileContext>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+	</ItemGroup>
 	
-  <ItemGroup>
-    <None Update="tsconfig.json">
-    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="tsconfig.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <Folder Include="wwwroot\imgs\" />
+	</ItemGroup>
 
-  <Target Name="CompileTypeScript" BeforeTargets="Build">
-    <Exec Command="tsc" />
-  </Target>
+	<!-- CLEAN old DIST FILES -->
+	<Target Name="CleanDistribution" BeforeTargets="Build">
+		<Message Text="🗑️ Cleaning old non-minified JS files..." Importance="high" />
+		<ItemGroup>
+			<NonMinifiedJsFiles Include="$(Dist)\*.js" Exclude="$(Dist)\*.min.js" />
+		</ItemGroup>
+		<Delete Files="@(NonMinifiedJsFiles)" ContinueOnError="false" />
+	</Target>
+
+	<!-- COMPILE TS into JS -->
+	<Target Name="BuildTypeScript" BeforeTargets="Build">
+		<Message Text="🛠️ Compiling TypeScript into JavaScript..." Importance="high" />
+		<Exec Command="tsc --build" ContinueOnError="false" />
+	</Target>
+
+	<!-- WRITE UTC to BUILD FILE -->
+	<Target Name="WriteUtcTimeToBuildFile" AfterTargets="Build">
+		<PropertyGroup>
+			<UtcNow>$([System.DateTime]::UtcNow.ToString("o"))</UtcNow>
+			<BuildTxtPath>$(ProjectDir)wwwroot\files\build.txt</BuildTxtPath>
+		</PropertyGroup>
+		<Message Text="📄 Writing ISO 8601 UTC datetime to '\files\build.txt'..." Importance="high" />
+		<WriteLinesToFile File="$(BuildTxtPath)" Lines="$(UtcNow)" Overwrite="true" Encoding="UTF-8" />
+	</Target>
 
 </Project>

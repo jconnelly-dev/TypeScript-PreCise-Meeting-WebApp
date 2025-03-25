@@ -7,10 +7,10 @@
 *.vs/
 *.vscode/
 *.DS_Store
-wwwroot/dist/
+wwwroot/files/build.txt
 
 # TypeScript build output
-wwwroot/dist/
+wwwroot/dist/*
 tsconfig.tsbuildinfo
 node_modules/
 
