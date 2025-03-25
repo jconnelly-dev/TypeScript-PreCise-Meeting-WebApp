@@ -19,7 +19,7 @@
 
 
 
-# PreCiseMRM Meeting SPA (.NET 9 + HTML/CSS/TypeScript)
+# PreCiseMRM Meeting WebApp SPA
 
 A minimalist Single Page Application using ASP.NET Core 9 as a static file host, with TypeScript for frontend logic and no Razor/Blazor.
 
@@ -27,8 +27,8 @@ A minimalist Single Page Application using ASP.NET Core 9 as a static file host,
 
 ## 📦 Run Docker
 ```bash
-docker build -t precise-meeting-spa .
-docker run -p 8080:8080 precise-meeting-spa
+docker build -t typescript-meeting-webapp .
+docker run -p 8080:8080 typescript-meeting-webapp
 ```
 
 
@@ -44,9 +44,9 @@ Access: [http://localhost:5000](http://localhost:5000)
 ## 🚢 Deploy to Heroku
 ```bash
 heroku container:login
-heroku create your-app-name
+heroku create precise-meeting-spa
 
-docker tag typescript-meeting-spa registry.heroku.com/precise-meeting-spa/web
+docker tag typescript-meeting-webapp registry.heroku.com/precise-meeting-spa/web
 docker push registry.heroku.com/precise-meeting-spa/web
 heroku container:release web -a precise-meeting-spa
 heroku open -a precise-meeting-spa
@@ -56,8 +56,8 @@ heroku open -a precise-meeting-spa
 ## 📁 Project Structure
 ```
 Solution/
-├── TypeScript-Meeting-Spa.sln
-├── TypeScript-Meeting-Spa.csproj
+├── TypeScript-Meeting-WebApp.sln
+├── TypeScript-Meeting-WebApp.csproj
 ├── Program.cs
 ├── Dockerfile
 ├── tsconfig.json
