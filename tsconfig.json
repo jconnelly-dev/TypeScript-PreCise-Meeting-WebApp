@@ -1,0 +1,10 @@
+﻿{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "outDir": "wwwroot/dist",
+    "rootDir": "frontend",
+    "strict": true
+  },
+  "include": [ "frontend" ]
+}
