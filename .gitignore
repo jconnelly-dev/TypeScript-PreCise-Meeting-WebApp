@@ -7,7 +7,6 @@
 *.vs/
 *.vscode/
 *.DS_Store
-Dockerfile
 wwwroot/dist/
 
 # TypeScript build output
