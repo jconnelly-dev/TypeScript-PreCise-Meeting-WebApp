@@ -21,15 +21,16 @@
 
 # PreCiseMRM Meeting WebApp SPA
 
-A minimalist Single Page Application using ASP.NET Core 9 as a static file host, with TypeScript for frontend logic and no Razor/Blazor.
+A minimalist Single Page Application using ASP.NET Core 9 as a static file host, with TypeScript for frontend logic.
 
 
 
-## 📦 Run Docker
+## 📦 Docker
 ```bash
 docker build -t typescript-meeting-webapp .
 docker run -p 8080:8080 typescript-meeting-webapp
 ```
+Access: [http://localhost:8080](http://localhost:8080)
 
 
 ## 🚀 Run Locally
@@ -51,6 +52,7 @@ docker push registry.heroku.com/precise-meeting-spa/web
 heroku container:release web -a precise-meeting-spa
 heroku open -a precise-meeting-spa
 ```
+Access: [http://precisemrm-meeting-app](https://precisemrm-meeting-app-ccd209b1d4ae.herokuapp.com/)
 
 
 ## 📁 Project Structure
