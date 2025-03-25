@@ -9,10 +9,10 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
-# Install Node.js & TypeScript
+# Install Node.js, TypeScript, and esbuild globally
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs && \
-    npm install -g typescript
+    npm install -g typescript esbuild
 
 # Copy everything for proper restore, restore dependencies, then build the project
 COPY . .

@@ -15,28 +15,17 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<None Update="tsconfig.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-	
-	<ItemGroup>
-	  <Folder Include="wwwroot\imgs\" />
+		<Folder Include="wwwroot\css\" />
+		<Folder Include="wwwroot\dist\" />
+		<Folder Include="wwwroot\files\" />
+		<Folder Include="wwwroot\imgs\" />
 	</ItemGroup>
 
-	<!-- CLEAN old DIST FILES -->
-	<Target Name="CleanDistribution" BeforeTargets="Build">
-		<Message Text="🗑️ Cleaning old non-minified JS files..." Importance="high" />
-		<ItemGroup>
-			<NonMinifiedJsFiles Include="$(Dist)\*.js" Exclude="$(Dist)\*.min.js" />
-		</ItemGroup>
-		<Delete Files="@(NonMinifiedJsFiles)" ContinueOnError="false" />
-	</Target>
-
-	<!-- COMPILE TS into JS -->
-	<Target Name="BuildTypeScript" BeforeTargets="Build">
-		<Message Text="🛠️ Compiling TypeScript into JavaScript..." Importance="high" />
-		<Exec Command="tsc --build" ContinueOnError="false" />
+	<!-- COMPILE, BUNDLE, and MINIFY JS -->
+	<Target Name="BundleTypeScript" BeforeTargets="Build">
+		<Message Text="📦 Compiling TypeScript with esbuild..." Importance="high" />
+		<Message Text="📦 Bundling and Minifying JavaScript with esbuild..." Importance="high" />
+		<Exec Command="node bundle.js" ContinueOnError="false" />
 	</Target>
 
 	<!-- WRITE UTC to BUILD FILE -->

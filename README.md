@@ -54,9 +54,10 @@ Access: [http://localhost:8080](http://localhost:8080)
 
 ## 🚀 Run Locally
 ```bash
-npm install -g typescript
+cd <your-solution-root>
 npm install
 dotnet build
+dotnet run
 ```
 Access: [http://localhost:8080](http://localhost:8080)
 
@@ -84,6 +85,7 @@ Solution/
 ├── TypeScript-Meeting-WebApp.csproj
 ├── Program.cs
 ├── Dockerfile
+├── bundle.js
 ├── tsconfig.json
 ├── .dockerignore
 ├── .gitignore
@@ -98,9 +100,11 @@ Solution/
     ├── precise-exception.ts
     └── randomizer.ts
 └── wwwroot/
-    ├── index.html
-    ├── styles.css
-    └── dist/main.min.js (compiled)
+    ├── css/site.css
+    ├── dist/main.min.js (compiled)
+    ├── files/names.txt
+    ├── imgs/favicon.ico
+    └── index.html
 ```
 
 

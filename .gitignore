@@ -9,6 +9,11 @@
 *.DS_Store
 wwwroot/files/build.txt
 
+# esbuild output that is required
+## i.e. DO NOT ignore these!
+!package.json
+!package-lock.json
+
 # TypeScript build output
 wwwroot/dist/*
 tsconfig.tsbuildinfo

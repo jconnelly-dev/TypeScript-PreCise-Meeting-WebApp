@@ -1,0 +1,23 @@
+{
+  "name": "solution",
+  "version": "1.0.0",
+  "description": "<a name=\"readme-top\"></a>",
+  "main": "bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jconnelly-dev/TypeScript-PreCise-Meeting-WebApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jconnelly-dev/TypeScript-PreCise-Meeting-WebApp/issues"
+  },
+  "homepage": "https://github.com/jconnelly-dev/TypeScript-PreCise-Meeting-WebApp#readme",
+  "devDependencies": {
+    "esbuild": "^0.25.1"
+  }
+}
