@@ -23,7 +23,7 @@
 
 	<!-- COMPILE, BUNDLE, and MINIFY JS -->
 	<Target Name="BundleTypeScript" BeforeTargets="Build">
-		<Message Text="📦 Compiling TypeScript with esbuild..." Importance="high" />
+		<Message Text="🛠️ Compiling TypeScript with esbuild..." Importance="high" />
 		<Message Text="📦 Bundling and Minifying JavaScript with esbuild..." Importance="high" />
 		<Exec Command="node bundle.js" ContinueOnError="false" />
 	</Target>
