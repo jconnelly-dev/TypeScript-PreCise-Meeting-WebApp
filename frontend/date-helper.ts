@@ -1,4 +1,6 @@
-﻿export type DayOfWeek = 'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday';
+﻿import { Logger } from './logger.js';
+
+export type DayOfWeek = 'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday';
 
 export const Days: Record<DayOfWeek, DayOfWeek> = {
     Sunday: 'Sunday',
@@ -24,11 +26,13 @@ export class DateHelper {
             month: 'long',
             day: 'numeric'
         }): string {
+        Logger.log(Logger.LogLevel.TRACE, DateHelper, DateHelper.formatDateString);
 
         return date.toLocaleDateString('en-US', formatOptions);
     }
 
     public static getDayOfWeek(date: Date): DayOfWeek {
+        Logger.log(Logger.LogLevel.TRACE, DateHelper, DateHelper.getDayOfWeek);
 
         // Get numeric day of week (i.e. number 0-6).
         const dayIndex = date.getDay();
@@ -41,6 +45,7 @@ export class DateHelper {
     }
 
     public static getDayOfYear(date: Date): number {
+        Logger.log(Logger.LogLevel.TRACE, DateHelper, DateHelper.getDayOfYear);
 
         // Create a date that is January 1st of the same year as the date given.
         const startOfYear = new Date(date.getFullYear(), 0, 0);
@@ -55,6 +60,7 @@ export class DateHelper {
     }
 
     public static getDayOfWeekOfYear(date: Date, targetDay: keyof typeof Days): number {
+        Logger.log(Logger.LogLevel.TRACE, DateHelper, DateHelper.getDayOfWeekOfYear);
 
         // Ensure that the given date is the given target day.
         const targetDayIndex = Object.keys(Days).indexOf(targetDay);
@@ -71,11 +77,13 @@ export class DateHelper {
     }
 
     public static isLeapYear(year: number): boolean {
+        Logger.log(Logger.LogLevel.TRACE, DateHelper, DateHelper.isLeapYear);
 
         return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
     }
 
     public static getNumDaysInYear(date: Date): number {
+        Logger.log(Logger.LogLevel.TRACE, DateHelper, DateHelper.getNumDaysInYear);
 
         const year = date.getFullYear();
 
