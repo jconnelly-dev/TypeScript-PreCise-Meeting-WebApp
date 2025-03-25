@@ -1,6 +1,7 @@
 <a name="readme-top"></a>
 
 
+
 <!-- PROJECT SHIELDS -->
 <p align="center">
   <a href="https://github.com/your-org/your-repo/graphs/contributors">
@@ -19,6 +20,24 @@
 
 
 
+<!-- TECHNOLOGY SHIELDS -->
+<p align="center">
+  <img src="[.Net]" alt=".NET Badge"/>
+  <img src="[C#]" alt="C# Badge"/>
+  <img src="[TypeScript]" alt="TypeScript Badge"/>
+  <img src="[JavaScript]" alt="JavaScript Badge"/>
+  <img src="[HTML5]" alt="HTML5 Badge"/>
+  <img src="[CSS3]" alt="CSS3 Badge"/>
+  <img src="[Docker]" alt="Docker Badge"/>
+  <img src="[Heroku]" alt="Heroku Badge"/>
+  <img src="[PowerShell]" alt="PowerShell Badge"/>
+  <img src="[Visual Studio]" alt="Visual Studio Badge"/>
+  <img src="[Markdown]" alt="Markdown Badge"/>
+</p>
+
+
+
+
 # PreCiseMRM Meeting WebApp SPA
 
 A minimalist Single Page Application using ASP.NET Core 9 as a static file host, with TypeScript for frontend logic.
@@ -33,6 +52,7 @@ docker run -p 8080:8080 typescript-meeting-webapp
 Access: [http://localhost:8080](http://localhost:8080)
 
 
+
 ## 🚀 Run Locally
 ```bash
 npm install -g typescript
@@ -40,6 +60,7 @@ npm install
 dotnet build
 ```
 Access: [http://localhost:5000](http://localhost:5000)
+
 
 
 ## 🚢 Deploy to Heroku
@@ -55,6 +76,7 @@ heroku open -a precise-meeting-spa
 Access: [http://precisemrm-meeting-app](https://precisemrm-meeting-app-ccd209b1d4ae.herokuapp.com/)
 
 
+
 ## 📁 Project Structure
 ```
 Solution/
@@ -63,22 +85,29 @@ Solution/
 ├── Program.cs
 ├── Dockerfile
 ├── tsconfig.json
+├── .dockerignore
 ├── .gitignore
 ├── README.md
 ├── frontend/
-│   └── main.ts
+    ├── clipboard.ts
+    ├── date-helper.ts
+    ├── file-helper.ts
+    ├── logger.ts
+    ├── main.ts
+    ├── meetings.ts
+    ├── precise-exception.ts
+    └── randomizer.ts
 └── wwwroot/
     ├── index.html
     ├── styles.css
-    └── dist/main.js (compiled)
+    └── dist/main.min.js (compiled)
 ```
+
 
 
 ## License
 
 Distributed under the Apache License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -107,13 +136,14 @@ You can reach me via:
 [issues-url]: https://github.com/othneildrew/Best-README-Template/issues
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[product-screenshot]: images/screenshot.png
+
 [.Net]: https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white
 [C#]: https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=csharp&logoColor=white
 [TypeScript]: https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white
 [JavaScript]: https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E
 [HTML5]: https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white
 [CSS3]: https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white
+[Docker]: https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white
 [Heroku]: https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white
 [PowerShell]: https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&logo=powershell&logoColor=white
 [Visual Studio]: https://img.shields.io/badge/Visual%20Studio-5C2D91.svg?style=for-the-badge&logo=visual-studio&logoColor=white
