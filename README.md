@@ -58,7 +58,7 @@ npm install -g typescript
 npm install
 dotnet build
 ```
-Access: [http://localhost:5000](http://localhost:5000)
+Access: [http://localhost:8080](http://localhost:8080)
 
 
 
@@ -66,6 +66,7 @@ Access: [http://localhost:5000](http://localhost:5000)
 ```bash
 heroku container:login
 heroku create precise-meeting-spa
+heroku stack:set container -a precise-meeting-spa
 
 docker tag typescript-meeting-webapp registry.heroku.com/precise-meeting-spa/web
 docker push registry.heroku.com/precise-meeting-spa/web
