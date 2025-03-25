@@ -1,6 +1,0 @@
-﻿build:
-  docker:
-    web: PreCiseMeetingWebApp\Dockerfile
-
-run:
-  web: "dotnet PreCiseMeetingWebApp.dll"
