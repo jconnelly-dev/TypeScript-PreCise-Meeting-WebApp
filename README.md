@@ -37,7 +37,7 @@
 
 
 
-# PreCiseMRM Meeting WebApp SPA
+# PreCiseMRM Meeting WebApp
 
 A minimalist Single Page Application using ASP.NET Core 9 as a static file host, with TypeScript for frontend logic.
 
@@ -72,7 +72,7 @@ docker push registry.heroku.com/precise-meeting-spa/web
 heroku container:release web -a precise-meeting-spa
 heroku open -a precise-meeting-spa
 ```
-Access: [http://precisemrm-meeting-app](https://precisemrm-meeting-app-ccd209b1d4ae.herokuapp.com/)
+Access: [http://precisemrm-meeting-app](https://precise-meeting-spa-254ba9037d63.herokuapp.com/)
 
 
 
