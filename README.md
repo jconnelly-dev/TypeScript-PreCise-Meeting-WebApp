@@ -74,7 +74,7 @@ docker push registry.heroku.com/precise-meeting-spa/web
 heroku container:release web -a precise-meeting-spa
 heroku open -a precise-meeting-spa
 ```
-Access: [http://precisemrm-meeting-app](https://precise-meeting-spa-254ba9037d63.herokuapp.com/)
+Access: [https://precisemrm-meeting](https://precise-meeting-spa-254ba9037d63.herokuapp.com/)
 
 
 
