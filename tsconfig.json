@@ -1,11 +1,11 @@
 ﻿{
   "compilerOptions": {
+    "rootDir": "frontend",
+    "outDir": "wwwroot/dist",
     "target": "es6",
     "module": "esnext",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "outDir": "wwwroot/dist",
-    "rootDir": "frontend",
     "strict": true
   },
   "include": [ "frontend/**/*.ts" ]

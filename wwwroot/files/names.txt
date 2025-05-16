@@ -1,4 +1,3 @@
-"andrew becklund"
 "andrew devoe"
 "angela gregg"
 "anthony brother"
@@ -7,6 +6,7 @@
 "darin macfarland"
 "dave carter"
 "dave heil"
+"david casey"
 "emily sullivan"
 "jacob hays"
 "jay wendt"

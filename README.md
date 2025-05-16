@@ -84,18 +84,20 @@ Solution/
 ├── TypeScript-Meeting-WebApp.sln
 ├── TypeScript-Meeting-WebApp.csproj
 ├── Program.cs
-├── Dockerfile
-├── bundle.js
+├── appsettings.json
 ├── tsconfig.json
+├── bundle.js
+├── Dockerfile
 ├── .dockerignore
 ├── .gitignore
 ├── README.md
+├── LICENSE
 ├── frontend/
     ├── clipboard.ts
     ├── date-helper.ts
     ├── file-helper.ts
     ├── logger.ts
-    ├── main.ts
+    ├── main.ts (entry point)
     ├── meetings.ts
     ├── precise-exception.ts
     └── randomizer.ts
