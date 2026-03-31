@@ -3,6 +3,7 @@ import { DateHelper } from './date-helper.js';
 import { FileHelper } from './file-helper.js';
 import { Logger } from './logger.js';
 import { Meetings } from './meetings.js';
+import { ParticipantList } from './participant-list.js';
 
 // Ensure this script runs -> after the HTML document is fully parsed, but before the DOM content is fully loaded and displayed.
 document.addEventListener('DOMContentLoaded', async () => {
@@ -35,11 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const meetingNames: string[] = Meetings.getMeetingForWeek(userNow, names);
             if (meetingNames) {
                 meetingNames.forEach((name, index) => {
-                    const itemElement = document.createElement('li');
-                    const span = document.createElement('span');
-                    span.textContent = `${index + 1}`; // +1 cuz numbered list displayed has base index=1 vs array base index=0
-                    itemElement.appendChild(span);
-                    itemElement.append(` ${name}`);
+                    const itemElement: HTMLLIElement = ParticipantList.createParticipantListItem(name, index);
                     listElement.appendChild(itemElement);
                 });
 
