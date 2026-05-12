@@ -45,6 +45,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (buttonElement) {
                     buttonElement.addEventListener('click', Clipboard.copyElementChangeState);
                 }
+
+                const editModeButtonElement: HTMLButtonElement | null = document.getElementById('edit-mode-button') as HTMLButtonElement;
+                if (editModeButtonElement) {
+                    ParticipantList.initializeEditModeToggle(editModeButtonElement);
+                }
             }
         }
     }

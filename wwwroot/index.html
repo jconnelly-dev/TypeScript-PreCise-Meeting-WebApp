@@ -36,10 +36,16 @@
             <section id="participants-list" class="meeting-list">
                 <ul></ul>
             </section>
-            <button id="copy-button" class="meeting-button">
-                <i id="copy-icon" class="icon fa fa-copy"></i>
-                <span class="share-info">Copy</span>
-            </button>
+            <div class="meeting-controls">
+                <button id="copy-button" class="meeting-button" type="button">
+                    <i id="copy-icon" class="icon fa fa-copy"></i>
+                    <span class="share-info">Copy</span>
+                </button>
+                <button id="edit-mode-button" class="meeting-button meeting-button-toggle" type="button" aria-pressed="false">
+                    <i class="icon fa fa-pencil"></i>
+                    <span class="share-info">Edit</span>
+                </button>
+            </div>
         </section>
         <section class="meeting-info">
             <h2>Website Last Published</h2>

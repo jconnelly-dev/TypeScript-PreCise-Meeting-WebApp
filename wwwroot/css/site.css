@@ -26,6 +26,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 html {
@@ -86,6 +88,13 @@ h1, h2, h3, h4, h5, h6 {
     padding: 2em 3em 1em;
 }
 
+.meeting-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+}
+
 .meeting-header {
     font-size: 1.75em;
 }
@@ -120,13 +129,33 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .meeting-board ul li.meeting-participant {
-    width: fit-content;
+    width: 100%;
+    min-height: 2rem;
     display: flex;
     align-items: center;
     gap: 0.75em;
     border-radius: 999px;
     cursor: pointer;
-    transition: opacity 180ms ease;
+    transition: opacity 180ms ease, background-color 180ms ease;
+    padding-right: 0.5rem;
+}
+
+body.edit-mode-enabled .meeting-board ul li.meeting-participant {
+    cursor: grab;
+}
+
+body.edit-mode-enabled .meeting-board ul li.meeting-participant.is-editing {
+    cursor: default;
+}
+
+body.edit-mode-enabled .meeting-board ul li.meeting-participant.is-dragging {
+    opacity: 0.55;
+    transform: scale(0.985);
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.meeting-board ul li.meeting-participant:hover {
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .meeting-board ul li.meeting-participant:focus-visible {
@@ -149,17 +178,94 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.6em;
 }
 
+.meeting-board ul li .meeting-participant-number {
+    flex: 0 0 1.5em;
+    margin-right: 0.05em;
+}
+
+.meeting-board ul li .meeting-participant-number.is-crossed-out {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.5em;
+    height: 1.5em;
+    font-size: 1em;
+    font-weight: 700;
+    line-height: 1.6em;
+    transform: translateY(-2px);
+}
+
 .meeting-board ul li .meeting-participant-name {
     position: relative;
-    display: inline-block;
+    display: block;
+    flex: 1 1 0;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     transform: none;
     background: none;
     color: inherit;
-    margin-right: 0;
-    width: auto;
+    margin-right: auto;
+    text-align: left;
+    width: 100%;
     height: auto;
     line-height: inherit;
     border-radius: 0;
+}
+
+.meeting-participant-edit {
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    border-radius: 999px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.18);
+    color: var(--precise-white);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(6px);
+    transition: opacity 180ms ease, transform 180ms ease, background-color 180ms ease;
+}
+
+body.edit-mode-enabled .meeting-participant:hover .meeting-participant-edit,
+body.edit-mode-enabled .meeting-participant:focus-within .meeting-participant-edit,
+body.edit-mode-enabled .meeting-participant.is-editing .meeting-participant-edit {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+
+.meeting-participant-edit:hover,
+.meeting-participant-edit:focus-visible {
+    background: var(--precise-green);
+    outline: none;
+}
+
+.meeting-participant-input {
+    flex: 1 1 0;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 2rem;
+    font: inherit;
+    line-height: 1.2;
+    color: var(--precise-white);
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 999px;
+    padding: 0 0.75rem;
+    margin: 0;
+    text-shadow: inherit;
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+.meeting-participant.is-editing .meeting-participant-name {
+    display: none;
 }
 
 .meeting-board ul li .meeting-participant-name::after {
@@ -200,10 +306,43 @@ h1, h2, h3, h4, h5, h6 {
     background-color: lightgray;
     border: none;
     border-radius: 5px;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
     margin: 10px;
     padding: 10px 14px;
     cursor: pointer;
+    white-space: nowrap;
+}
+
+.meeting-button-toggle {
+    background-color: var(--precise-mediumdarkgrey);
+    color: var(--precise-white);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    width: 6.5rem;
+    flex: 0 0 6.5rem;
+    padding: 0.65rem 0.9rem;
+}
+
+.meeting-button-toggle:hover {
+    background-color: #5f625f;
+}
+
+.meeting-button-toggle:focus,
+.meeting-button-toggle:active {
+    background-color: var(--precise-mediumdarkgrey);
+    color: var(--precise-white);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.meeting-button-toggle.is-active,
+.meeting-button-toggle.is-active:hover,
+.meeting-button-toggle.is-active:focus,
+.meeting-button-toggle.is-active:active {
+    background-color: var(--precise-green);
+    color: var(--precise-white);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
 }
 
 .meeting-button:hover {
@@ -211,16 +350,16 @@ h1, h2, h3, h4, h5, h6 {
     text-shadow: none;
 }
 
-.meeting-button:active {
+.meeting-button:not(.meeting-button-toggle):active {
     background-color: var(--precise-green);
 }
 
-.meeting-button:focus {
+.meeting-button:not(.meeting-button-toggle):focus {
     background-color: var(--precise-green);
 }
 
 .share-info {
-    margin-left: 1ch;
+    margin-left: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {

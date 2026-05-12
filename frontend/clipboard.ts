@@ -5,7 +5,7 @@ export class Clipboard {
     public static copyElementChangeState(): void {
         Logger.log(Logger.LogLevel.INFO, Clipboard, Clipboard.copyElementChangeState);
 
-        const attendees: string[] = Clipboard.extractParticipants();
+        const attendees: Array<{ badge: string, name: string }> = Clipboard.extractParticipants();
         const meetingDate: string = Clipboard.extractMeetingDateString();
         if (attendees && meetingDate) {
             const iconElement: HTMLElement | null = document.getElementById('copy-icon');
@@ -30,26 +30,31 @@ export class Clipboard {
         }
     }
 
-    public static extractParticipants(): string[] {
+    public static extractParticipants(): Array<{ badge: string, name: string }> {
         Logger.log(Logger.LogLevel.TRACE, Clipboard, Clipboard.extractParticipants);
 
-        let extractedNames: string[] = [];
+        let extractedParticipants: Array<{ badge: string, name: string }> = [];
 
         const listSectionElement: HTMLElement | null = document.getElementById('participants-list');
         if (listSectionElement) {
             const participantItems = listSectionElement.querySelectorAll('li');
             if (participantItems) {
                 participantItems.forEach((item) => {
-                    // Remove the number and any leading whitespace.
-                    const name: string | undefined = item.textContent?.replace(/^\d+\s*/, '').trim();
-                    if (name) {
-                        extractedNames.push(name);
+                    const badgeElement: HTMLElement | null = item.querySelector('.meeting-participant-number');
+                    const nameElement: HTMLElement | null = item.querySelector('.meeting-participant-name');
+                    const badgeText: string | undefined = badgeElement?.textContent?.trim();
+                    const name: string | undefined = nameElement?.textContent?.trim();
+                    if (badgeText && name) {
+                        extractedParticipants.push({
+                            badge: badgeElement?.classList.contains('is-crossed-out') ? 'x' : badgeText,
+                            name,
+                        });
                     }
                 });
             }
         }
 
-        return extractedNames;
+        return extractedParticipants;
     }
 
     public static extractMeetingDateString(): string {
@@ -68,7 +73,7 @@ export class Clipboard {
         return extractedDate;
     }
 
-    public static insertNamesIntoClipboard(localDateString: string, attendees: string[]): void {
+    public static insertNamesIntoClipboard(localDateString: string, attendees: Array<{ badge: string, name: string }>): void {
         Logger.log(Logger.LogLevel.TRACE, Clipboard, Clipboard.insertNamesIntoClipboard);
 
         if (localDateString) {
@@ -76,9 +81,8 @@ export class Clipboard {
             let copiedText: string = "--- START MEETING ---";
             copiedText += `${newLine}--- ${localDateString} ---`;
             if (attendees) {
-                attendees.forEach((attendee, arrayIdx) => {
-                    const displayIdx: number = arrayIdx + 1;
-                    copiedText += `${newLine}[${displayIdx}] ${attendee}`;
+                attendees.forEach((attendee) => {
+                    copiedText += `${newLine}[${attendee.badge}] ${attendee.name}`;
                 });
             }
             navigator.clipboard.writeText(copiedText);
